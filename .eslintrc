@@ -1,32 +1,21 @@
 {
   "plugins": ["react", "react-native", "prettier"],
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
-  "extends": ["prettier"],
+  "extends": ["prettier", "airbnb"],
   "env": {
     "react-native/react-native": true
   },
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "printWidth": 120,
-        "tabWidth": 2,
-        "singleQuote": true,
-        "semi": true,
-        "trailingComma": "es5",
-        "bracketSpacing": false
-      }
-    ],
     "react-native/no-unused-styles": 1,
     "react-native/no-inline-styles": 1,
     "react-native/no-color-literals": 1,
-    "semi": ["warn", "always"],
-    "indent": ["error", 2, { "SwitchCase": 1 }],
-    "object-curly-spacing": ["error", "never"]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": 0
   }
 }
