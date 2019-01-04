@@ -1,13 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 import StatusBar from './components/StatusBar';
-import DeckList from './components/DeckList';
+import Quiz from './components/Quiz';
 
 const App = () => (
   <View>
     <StatusBar />
 
-    <DeckList />
+    <Quiz />
   </View>
 );
 
