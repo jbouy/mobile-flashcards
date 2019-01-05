@@ -3,6 +3,10 @@ import { View, Button } from 'react-native';
 import Deck from './Deck';
 
 class DeckDetails extends Component {
+  static navigationOptions = () => ({
+    title: 'Deck 1',
+  });
+
   addCard = () => {};
 
   startQuiz = () => {};

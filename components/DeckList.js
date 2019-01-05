@@ -1,14 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Deck from './Deck';
 
-const DeckList = () => (
+const DeckList = props => (
   <View>
-    <Deck title="Deck 1" totalCards={3} />
+    <TouchableOpacity onPress={() => props.navigation.navigate('DeckDetails')}>
+      <Deck title="Deck 1" totalCards={3} />
+    </TouchableOpacity>
 
-    <Deck title="Deck 2" totalCards={1} />
+    <TouchableOpacity>
+      <Deck title="Deck 2" totalCards={1} />
+    </TouchableOpacity>
 
-    <Deck title="Deck 3" totalCards={5} />
+    <TouchableOpacity>
+      <Deck title="Deck 3" totalCards={5} />
+    </TouchableOpacity>
   </View>
 );
 

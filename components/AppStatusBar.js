@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import { Constants } from 'expo';
 
 const AppStatusBar = ({ backgroundColor, ...props }) => (
-  <View
+  <SafeAreaView
     style={{
+      backgroundColor,
       height: Constants.statusBarHeight,
     }}
   >
-    <StatusBar {...props} />
-  </View>
+    <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+  </SafeAreaView>
 );
 
 export default AppStatusBar;
