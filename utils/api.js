@@ -5,7 +5,7 @@ const DECK_STORAGE_KEY = 'MobileFlashCards:decks';
 export async function getDecks() {
   const decksJson = await AsyncStorage.getItem(DECK_STORAGE_KEY);
 
-  return JSON.parse(decksJson);
+  return JSON.parse(decksJson || '{}');
 }
 
 export async function saveDeckTitle(title) {

@@ -1,8 +1,12 @@
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { setup } from 'actionware';
 import { View, StyleSheet } from 'react-native';
 import AppContainer from './AppContainer';
 import AppStatusBar from './components/AppStatusBar';
 import { purple } from './utils/colors';
+import reducer from './reducers';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,12 +14,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const App = () => (
-  <View style={styles.container}>
-    <AppStatusBar backgroundColor={purple} barStyle="light-content" />
+const store = createStore(reducer);
+setup({ store });
 
-    <AppContainer />
-  </View>
+const App = () => (
+  <Provider store={store}>
+    <View style={styles.container}>
+      <AppStatusBar backgroundColor={purple} barStyle="light-content" />
+
+      <AppContainer />
+    </View>
+  </Provider>
 );
 
 export default App;
