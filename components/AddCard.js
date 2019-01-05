@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { View, Button, TextInput } from 'react-native';
 
 class AddCard extends Component {
-  submit = () => {};
+  submit = () => {
+    const { navigation } = this.props;
+
+    navigation.navigate('DeckDetails');
+  };
 
   render() {
     return (

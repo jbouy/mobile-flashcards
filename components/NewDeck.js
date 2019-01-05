@@ -4,7 +4,11 @@ import {
 } from 'react-native';
 
 class NewDeck extends Component {
-  submit = () => {};
+  submit = () => {
+    const { navigation } = this.props;
+
+    navigation.navigate('DeckList');
+  };
 
   render() {
     return (

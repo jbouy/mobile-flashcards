@@ -7,11 +7,23 @@ class DeckDetails extends Component {
     title: 'Deck 1',
   });
 
-  addCard = () => {};
+  addCard = () => {
+    const { navigation } = this.props;
 
-  startQuiz = () => {};
+    navigation.navigate('AddCard');
+  };
 
-  deleteDeck = () => {};
+  startQuiz = () => {
+    const { navigation } = this.props;
+
+    navigation.navigate('Quiz');
+  };
+
+  deleteDeck = () => {
+    const { navigation } = this.props;
+
+    navigation.navigate('Home');
+  };
 
   render() {
     return (
