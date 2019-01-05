@@ -1,26 +1,90 @@
 import React, { Component } from 'react';
-import {
-  View, Button, TextInput, Text,
-} from 'react-native';
+import { connect } from 'react-redux';
+import { createActions, isBusy } from 'actionware';
+import { View, Text, StyleSheet } from 'react-native';
+import { addNewDeck } from '../actions/decks';
+import { lightGray, red } from '../utils/colors';
+import AppButton from './AppButton';
+import AppTextInput from './AppTextInput';
+
+const actions = createActions({
+  addNewDeck,
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: lightGray,
+  },
+  header: {
+    textAlign: 'center',
+    fontSize: 30,
+    marginBottom: 10,
+  },
+  deckTitle: {
+    marginBottom: 10,
+  },
+  errorMessage: {
+    color: red,
+    textAlign: 'center',
+  },
+  submitButton: {
+    marginTop: 'auto',
+  },
+});
 
 class NewDeck extends Component {
-  submit = () => {
-    const { navigation } = this.props;
+  state = {
+    title: '',
+    error: null,
+  };
 
-    navigation.navigate('DeckList');
+  submit = async () => {
+    const { navigation } = this.props;
+    const { title } = this.state;
+
+    this.setState({ error: null });
+
+    await actions
+      .addNewDeck(title)
+      .then(() => {
+        this.setState({ title: '' });
+        navigation.navigate('DeckList');
+      })
+      .catch(error => this.setState({ error }));
   };
 
   render() {
+    const { error, title } = this.state;
+    const { loading } = this.props;
+
     return (
-      <View>
-        <Text>What is the title of your new deck?</Text>
+      <View style={styles.container}>
+        <Text style={styles.header}>What is the title of your new deck?</Text>
 
-        <TextInput placeholder="Deck Title" />
+        <AppTextInput
+          style={styles.deckTitle}
+          placeholder="Deck Title"
+          value={title}
+          onChangeText={text => this.setState({ title: text })}
+        />
 
-        <Button title="Submit" onPress={this.submit} />
+        {error && <Text style={styles.errorMessage}>{error.message}</Text>}
+
+        <AppButton
+          disabled={loading}
+          style={styles.submitButton}
+          title="Submit"
+          onPress={this.submit}
+        />
       </View>
     );
   }
 }
 
-export default NewDeck;
+const mapStateToProps = () => ({
+  loading: isBusy(addNewDeck),
+});
+
+export default connect(mapStateToProps)(NewDeck);

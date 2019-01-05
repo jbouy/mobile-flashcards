@@ -2,21 +2,38 @@ import { AsyncStorage } from 'react-native';
 
 const DECK_STORAGE_KEY = 'MobileFlashCards:decks';
 
+function generateUID() {
+  return (
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+    + Math.random()
+      .toString(36)
+      .substring(2, 15)
+  );
+}
+
 export async function getDecks() {
   const decksJson = await AsyncStorage.getItem(DECK_STORAGE_KEY);
 
   return JSON.parse(decksJson || '{}');
 }
 
-export async function saveDeckTitle(title) {
+export async function addNewDeck(title) {
+  const deck = {
+    id: generateUID(),
+    title,
+    questions: [],
+  };
+
   await AsyncStorage.mergeItem(
     DECK_STORAGE_KEY,
     JSON.stringify({
-      [title]: {
-        title,
-      },
+      [deck.id]: deck,
     }),
   );
+
+  return deck;
 }
 
 export async function addCardToDeck(title, card) {

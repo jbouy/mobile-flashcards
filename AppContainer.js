@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   tabBar: {
     height: 56,
     shadowColor: shadow,
+    backgroundColor: white,
     shadowOffset: {
       width: 0,
       height: 3,

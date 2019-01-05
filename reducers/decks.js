@@ -1,4 +1,12 @@
 import { createReducer } from 'actionware';
-import { loadDecks } from '../actions/decks';
+import { loadDecks, addNewDeck } from '../actions/decks';
 
-export default createReducer({}).on(loadDecks, (state, decks) => ({ ...state, decks }));
+export default createReducer({})
+  .on(loadDecks, (state, decks) => ({
+    ...state,
+    decks,
+  }))
+  .on(addNewDeck, (state, deck) => ({
+    ...state,
+    [deck.id]: deck,
+  }));
