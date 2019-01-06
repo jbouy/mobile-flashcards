@@ -1,5 +1,5 @@
 import { createReducer } from 'actionware';
-import { loadDecks, addNewDeck } from '../actions/decks';
+import { loadDecks, addNewDeck, removeDeck } from '../actions/decks';
 
 export default createReducer({})
   .on(loadDecks, (state, decks) => ({
@@ -9,4 +9,11 @@ export default createReducer({})
   .on(addNewDeck, (state, deck) => ({
     ...state,
     [deck.id]: deck,
-  }));
+  }))
+  .on(removeDeck, (state, id) => {
+    const { [id]: remove, ...rest } = state;
+
+    return {
+      ...rest,
+    };
+  });

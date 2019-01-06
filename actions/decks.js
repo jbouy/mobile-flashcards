@@ -12,3 +12,9 @@ export async function addNewDeck(title) {
 
   return Api.addNewDeck(title);
 }
+
+export async function removeDeck(id) {
+  await Api.removeDeck(id);
+
+  return id;
+}

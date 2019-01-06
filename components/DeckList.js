@@ -45,9 +45,7 @@ class DeckList extends Component {
     this.onLoadDecks();
   }
 
-  onLoadDecks = async () => {
-    actions.loadDecks();
-  };
+  onLoadDecks = async () => actions.loadDecks();
 
   render() {
     const {
@@ -89,7 +87,9 @@ class DeckList extends Component {
         <FlatList
           data={decks}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('DeckDetails', { id: item.id })}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('DeckDetails', { id: item.id, title: item.title })}
+            >
               <Deck title={item.title} totalCards={item.questions ? item.questions.length : 0} />
             </TouchableOpacity>
           )}

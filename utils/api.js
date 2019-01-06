@@ -49,11 +49,11 @@ export async function addCardToDeck(title, card) {
   );
 }
 
-export async function removeDeck(title) {
+export async function removeDeck(id) {
   const decks = JSON.parse(await AsyncStorage.getItem(DECK_STORAGE_KEY));
 
-  decks[title] = undefined;
-  delete decks[title];
+  decks[id] = undefined;
+  delete decks[id];
 
   await AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
 }

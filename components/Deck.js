@@ -4,7 +4,6 @@ import { black, gray } from '../utils/colors';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     padding: 10,
   },
