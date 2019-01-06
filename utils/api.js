@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { AsyncStorage } from 'react-native';
 
 const DECK_STORAGE_KEY = 'MobileFlashCards:decks';
@@ -22,6 +23,7 @@ export async function addNewDeck(title) {
   const deck = {
     id: generateUID(),
     title,
+    created: moment().valueOf(),
     questions: [],
   };
 

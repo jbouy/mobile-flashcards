@@ -112,10 +112,13 @@ class DeckList extends Component {
 
 const mapStateToProps = ({ decks }) => ({
   loading: isBusy(loadDecks),
-  decks: _.map(decks, deck => ({
-    key: deck.id,
-    ...deck,
-  })),
+  decks: _.chain(decks)
+    .map(deck => ({
+      key: deck.id,
+      ...deck,
+    }))
+    .sortBy(['created'])
+    .value(),
 });
 
 export default connect(mapStateToProps)(DeckList);
