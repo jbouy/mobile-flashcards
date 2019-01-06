@@ -64,7 +64,7 @@ class DeckDetails extends Component {
 
     try {
       await actions.removeDeck(deck.id);
-      navigation.navigate('Home');
+      navigation.navigate('DeckList');
     } catch (error) {
       this.setState({ error });
     }

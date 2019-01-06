@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createActions, isBusy } from 'actionware';
+import { createActions, isBusy, onSuccess } from 'actionware';
 import { View, Text, StyleSheet } from 'react-native';
 import { addNewDeck } from '../actions/decks';
 import { lightGray, red } from '../utils/colors';
@@ -40,19 +40,23 @@ class NewDeck extends Component {
     error: null,
   };
 
-  submit = async () => {
+  componentDidMount() {
     const { navigation } = this.props;
+
+    onSuccess(addNewDeck, ({ payload }) => navigation.navigate('DeckDetails', { id: payload.id, title: payload.title }));
+  }
+
+  submit = async () => {
     const { title } = this.state;
 
     this.setState({ error: null });
 
-    await actions
-      .addNewDeck(title)
-      .then(() => {
-        this.setState({ title: '' });
-        navigation.navigate('DeckList');
-      })
-      .catch(error => this.setState({ error }));
+    try {
+      await actions.addNewDeck(title);
+      this.setState({ title: '' });
+    } catch (error) {
+      this.setState({ error });
+    }
   };
 
   render() {

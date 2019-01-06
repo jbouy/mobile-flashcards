@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { isBusy, createActions, getError } from 'actionware';
+import { isBusy, createActions } from 'actionware';
 import {
   View,
   TouchableOpacity,
@@ -41,16 +41,27 @@ const styles = StyleSheet.create({
 });
 
 class DeckList extends Component {
+  state = {
+    error: null,
+  };
+
   componentDidMount() {
     this.onLoadDecks();
   }
 
-  onLoadDecks = async () => actions.loadDecks();
+  onLoadDecks = async () => {
+    this.setState({ error: null });
+
+    try {
+      await actions.loadDecks();
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
 
   render() {
-    const {
-      loading, error, decks, navigation,
-    } = this.props;
+    const { loading, decks, navigation } = this.props;
+    const { error } = this.state;
 
     if (loading) {
       return (
@@ -101,7 +112,6 @@ class DeckList extends Component {
 
 const mapStateToProps = ({ decks }) => ({
   loading: isBusy(loadDecks),
-  error: getError(loadDecks),
   decks: _.map(decks, deck => ({
     key: deck.id,
     ...deck,
