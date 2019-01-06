@@ -15,7 +15,6 @@ function generateUID() {
 
 export async function getDecks() {
   const decksJson = await AsyncStorage.getItem(DECK_STORAGE_KEY);
-
   return JSON.parse(decksJson || '{}');
 }
 
