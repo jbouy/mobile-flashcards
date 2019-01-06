@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { lightGray } from '../utils/colors';
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications';
 import Card from './Card';
 import AppButton from './AppButton';
 
@@ -65,11 +66,14 @@ class Quiz extends Component {
     this.setState({ currentIndex: currentIndex + 1 });
   };
 
-  showResults = () => {
+  showResults = async () => {
     const {
       quizQuestions, navigation, id, title,
     } = this.props;
     const { correct, incorrect } = this.state;
+
+    await clearLocalNotification();
+    await setLocalNotification();
 
     navigation.navigate('Results', {
       id,

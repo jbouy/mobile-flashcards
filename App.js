@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { setup } from 'actionware';
@@ -7,6 +7,7 @@ import AppContainer from './AppContainer';
 import AppStatusBar from './components/AppStatusBar';
 import { purple } from './utils/colors';
 import reducer from './reducers';
+import { setLocalNotification } from './utils/notifications';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,14 +23,22 @@ const store = createStore(
 /* eslint-enable */
 setup({ store });
 
-const App = () => (
-  <Provider store={store}>
-    <View style={styles.container}>
-      <AppStatusBar backgroundColor={purple} barStyle="light-content" />
+class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
 
-      <AppContainer />
-    </View>
-  </Provider>
-);
+  render() {
+    return (
+      <Provider store={store}>
+        <View style={styles.container}>
+          <AppStatusBar backgroundColor={purple} barStyle="light-content" />
+
+          <AppContainer />
+        </View>
+      </Provider>
+    );
+  }
+}
 
 export default App;
