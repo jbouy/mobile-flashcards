@@ -18,3 +18,12 @@ export async function removeDeck(id) {
 
   return id;
 }
+
+export async function addCardToDeck(id, card) {
+  await Api.addCardToDeck(id, card);
+
+  return {
+    id,
+    ...card,
+  };
+}

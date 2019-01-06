@@ -35,16 +35,18 @@ export async function addNewDeck(title) {
   return deck;
 }
 
-export async function addCardToDeck(title, card) {
+export async function addCardToDeck(id, card) {
   const decks = JSON.parse(await AsyncStorage.getItem(DECK_STORAGE_KEY));
-  const deck = !decks[title] ? { title } : decks[title];
+  const deck = decks[id];
+
+  if (deck == null) throw new Error('Could not find deck to add card to.');
 
   deck.questions = [...deck.questions, { question: card.question, answer: card.answer }];
 
   await AsyncStorage.mergeItem(
     DECK_STORAGE_KEY,
     JSON.stringify({
-      [title]: deck,
+      [id]: deck,
     }),
   );
 }
