@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View, Text, TouchableOpacity, StyleSheet,
+} from 'react-native';
+import { purple } from '../utils/colors';
 
+const styles = StyleSheet.create({
+  cardText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 15,
+  },
+  linkText: {
+    color: purple,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+});
 class Card extends Component {
   state = {
     showAnswer: false,
@@ -18,10 +35,10 @@ class Card extends Component {
 
     return (
       <View>
-        <Text>{showAnswer ? answer : question}</Text>
+        <Text style={styles.cardText}>{showAnswer ? answer : question}</Text>
 
         <TouchableOpacity onPress={this.onToggleQuestionAnswer}>
-          <Text>{showAnswer ? 'Question' : 'Answer'}</Text>
+          <Text style={styles.linkText}>{showAnswer ? 'Back to Question' : 'Show Answer'}</Text>
         </TouchableOpacity>
       </View>
     );

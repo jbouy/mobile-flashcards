@@ -13,6 +13,7 @@ import NewDeck from './components/NewDeck';
 import DeckDetails from './components/DeckDetails';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
+import Results from './components/Results';
 
 const styles = StyleSheet.create({
   tabBar: {
@@ -83,6 +84,13 @@ const AppNavigator = createStackNavigator(
       screen: Quiz,
       navigationOptions: {
         title: 'Quiz',
+      },
+    },
+    Results: {
+      screen: Results,
+      navigationOptions: {
+        title: 'Results',
+        headerLeft: null,
       },
     },
   },
